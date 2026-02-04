@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Verdana&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/PAGES/STUDENT CSS/login2.css">
+</head>
+
+<body>
+    <div class="background"></div>
+
+    <div class="login-container">
+        <h2>Student Login</h2>
+        <p class="subtitle">Access your academic results securely</p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="regNo">Matric Number</label>
+                <input type="text" id="regNo" placeholder="Enter your Reg No" required>
+            </div>
+
+            <div class="password-container" style="position: relative;">
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                <i class="fa fa-eye" id="togglePassword"
+                    style="position: absolute; right: 10px; top: 35%; cursor: pointer;"></i>
+            </div><br>
+
+            <!-- <div class="options">
+                <a href="#">Forgot Password?</a>
+            </div> -->
+
+            <button type="submit" class="login-btn" id="proceed">LOGIN</button>
+        </form>
+
+        <br>
+        <a href="/PAGES/STUDENT HTML/Register.html">
+            <button type="button" class="login-btn" id="Register">REGISTER</button>
+        </a>
+
+        <p class="footer">© 2025 University of Nigeria, Nsukka</p>
+    </div>
+    <p id="error-message"></p>
+</body>
+<script src="/JS-frontend/login1.js"></script>
+
+</html>

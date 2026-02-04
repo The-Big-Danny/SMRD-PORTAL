@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/logIn.css">
+</head>
+
+<body>
+    <main>
+        <div class="hero-section">
+            <h2>LOGIN INTO ADMIN-ACCESS</h2>
+            <div class="overlay-text">
+                <form class="form">
+                    <label>FIRST NAME:</label>
+                    <input type="text" name="NAME" id="firstName" title="First Name!" required><br><br>
+
+                    <label>LAST NAME:</label>
+                    <input type="text" name="NAME" id="lastName" title="Last Name!" required><br><br>
+
+                    <label>ACCESS CODE:</label>
+                    <input type="text" name="NAME" id="regNo" title="Verification code!" required>
+                </form>
+            </div>
+            <div>
+             <a href="/PAGES/ADMIN/admin-dash.html"> <button type="submit" class="login-btn" onclick="proceed()" id="proceed">Proceed</button><br></a>  
+                <a href="/PAGES/STUDENT/logIn.html"><button type="submit" class="login-btn">Return</button><br>
+                </a>
+               <a href="/index.html"><button type="submit" class="login-btn" >HomePage⬅️</button></a>
+
+                <p id="error-message"></p>
+                <p id="success-message"></p>
+            </div>
+        </div>
+
+    </main>
+</body>
+<script src="/JS/login1.js"></script>
+
+</html>

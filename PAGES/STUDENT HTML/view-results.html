@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRD Portal | My Result</title>
+    <script src="JS-frontend/guard.js"></script>
+    <link rel="stylesheet" href="/PAGES/STUDENT CSS/view-result.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo">🎓 SRD Portal</h2>
+            <ul>
+                <li><a href="/PAGES/STUDENT HTML/student-dash.html"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="/PAGES/STUDENT HTML/profile-dash.html"><i class="fa fa-user"></i> My Profile</a></li>
+                <li class="active"><a href="/PAGES/STUDENT HTML/view-results.html"><i class="fa fa-chart-bar"></i> My
+                        Result</a></li>
+                <li><a href="/PAGES/STUDENT HTML/help-support.html"><i class="fa fa-question-circle"></i> Help</a></li>
+                <li><a href="/PAGES/STUDENT HTML/logout.html"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>My Result</h1>
+            </header>
+
+            <section class="semester">
+                <label for="semester-select">Select Semester:</label>
+                <select id="semester-select">
+                    <option value="1-First">2022/2023 - 100level (First Semester)</option>
+                    <option value="1-Second">2022/2023 - 100level (Second Semester)</option>
+                    <option value="2-First">2023/2024 - 200level (First Semester)</option>
+                    <option value="2-Second">2023/2024 - 200level (Second Semester)</option>
+                    <option value="3-First">2024/2025 - 300level (First Semester)</option>
+                    <option value="3-Second">2024/2025 - 300level (Second Semester)</option>
+                    <option value="4-First">2025/2026 - 400level (First Semester)</option>
+                    <option value="4-Second">2025/2026 - 400level (Second Semester)</option>
+                </select>
+            </section>
+
+            <section class="results">
+                <h3>Result Summary</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Credit Unit</th>
+                            <th>Score</th>
+                            <th>Grade</th>
+                            <th>Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-table-body">
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="summary">
+                <div class="summary-box cre">
+                    <h3>Total Credit Units:</h3>
+                    <p id="sem-units">0</p>
+                </div>
+                <div class="summary-box grd">
+                    <h3>Grade Points:</h3>
+                    <p id="sem-points">0</p>
+                </div>
+                <div class="summary-box gpa">
+                    <h3>Semester GPA:</h3>
+                    <p id="sem-gpa">0.00</p>
+                </div>
+            </section>
+
+            <div class="download-btn">
+                <button id="download-pdf"><i class="fa fa-download"></i> Download Result Slip (PDF)</button>
+                <button id="print-result" style="background-color: #444; margin-left: 10px;">
+                    <i class="fa fa-print"></i> Print Result
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="/JS-frontend/view-result.js"></script>
+</body>
+
+</html>

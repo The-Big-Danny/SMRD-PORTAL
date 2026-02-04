@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMRD Admin Dashboard</title>
+  <link rel="stylesheet" href="/ADMIN/ADMIN CSS/admin-dash.cs" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">S-R-D Admin</h2>
+    <nav class="menu">
+      <a href="dashboard.html" class="active">🏠 Dashboard</a>
+      <a href="/PAGES/ADMIN/add-result.html">➕ Add Result</a>
+      <a href="/PAGES/ADMIN/view-result.html">📋 View Results</a>
+      <a href="/PAGES/ADMIN/manage-result.html">manage Result</a>
+      <a href="analytics.html">Programme Courses</a>
+      <a href="index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <input type="text" placeholder="Search student..." class="search-bar" />
+      <div class="profile">
+        <img src="https://i.pravatar.cc/40" alt="Admin" />
+        <span>Admin</span>
+      </div>
+    </header>
+
+    <section class="dashboard-overview">
+      <div class="card total-students">
+        <h3>Total Students</h3>
+        <p>132</p>
+      </div>
+      <div class="card top-performer">
+        <h3>Top Performer</h3>
+        <p>Jane Doe</p>
+      </div>
+      <div class="card avg-gpa">
+        <h3>Average GPA</h3>
+        <p>3.67</p>
+      </div>
+    </section>
+
+    <section class="recent-results">
+      <h2>Recent Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Reg No</th>
+            <th>Department</th>
+            <th>GPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jane Doe</td>
+            <td>2022/247081</td>
+            <td>Computer Science</td>
+            <td>4.00</td>
+          </tr>
+          <tr>
+            <td>Emmanuel Ugwuneji</td>
+            <td>2022/247089</td>
+            <td>Statistics</td>
+            <td>3.85</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

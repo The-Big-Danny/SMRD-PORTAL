@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Results | SMRD Admin</title>
+  <link rel="stylesheet" href="/ADMIN CSS/manage-result.css" />
+</head>
+<body>
+    <header>
+  <!-- Sidebar -->
+    <h2 class="logo">SMRD Admin</h2>
+    <nav class="menu">
+      <a href="/PAGES/ADMIN/admin-dash.html">🏠 Dashboard</a>
+      <a href="/PAGES/ADMIN/add-result.html">➕ Add Result</a>
+      <a href="/PAGES/ADMIN/view-result.html">📋 View Results</a>
+      <a href="/PAGES/ADMIN/manage-result.html" class="active">✏️ Manage Results</a>
+      <a href="index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top-bar -->
+    <div class="top-bar">
+      <h2>Manage Student Results</h2>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/40" alt="Admin" />
+        <span>Admin</span>
+      </div>
+    </div>
+
+    <!-- Manage Results Section -->
+    <section class="manage-section">
+      <h2>Student Records</h2>
+
+      <table id="manageTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Reg No</th>
+            <th>Department</th>
+            <th>Level</th>
+            <th>GPA</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jane Doe</td>
+            <td>2022/247081</td>
+            <td>Computer Science</td>
+            <td>200 Level</td>
+            <td>4.00</td>
+            <td>
+              <button class="edit-btn" onclick="editRow(this)">Edit</button>
+              <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Jane Doe</td>
+            <td>2022/247081</td>
+            <td>Computer Science</td>
+            <td>200 Level</td>
+            <td>4.00</td>
+            <td>
+              <button class="edit-btn" onclick="editRow(this)">Edit</button>
+              <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr><tr>
+            <td>Jane Doe</td>
+            <td>2022/247081</td>
+            <td>Computer Science</td>
+            <td>200 Level</td>
+            <td>4.00</td>
+            <td>
+              <button class="edit-btn" onclick="editRow(this)">Edit</button>
+              <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr><tr>
+            <td>Jane Doe</td>
+            <td>2022/247081</td>
+            <td>Computer Science</td>
+            <td>200 Level</td>
+            <td>4.00</td>
+            <td>
+              <button class="edit-btn" onclick="editRow(this)">Edit</button>
+              <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Daniel Obasi</td>
+            <td>2022/247082</td>
+            <td>Information Tech</td>
+            <td>300 Level</td>
+            <td>3.80</td>
+            <td>
+              <button class="edit-btn" onclick="editRow(this)">Edit</button>
+              <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // ===== DELETE ROW FUNCTION =====
+    function deleteRow(button) {
+      const row = button.closest('tr');
+      const name = row.cells[0].textContent;
+      if (confirm(`Are you sure you want to delete ${name}'s result?`)) {
+        row.remove();
+        alert(`${name}'s record deleted successfully.`);
+      }
+    }
+
+    // ===== EDIT ROW FUNCTION =====
+    function editRow(button) {
+      const row = button.closest('tr');
+      const cells = row.getElementsByTagName('td');
+      for (let i = 0; i < cells.length - 1; i++) {
+        const oldValue = cells[i].textContent;
+        const input = document.createElement('input');
+        input.value = oldValue;
+        input.style.width = "90%";
+        cells[i].innerHTML = '';
+        cells[i].appendChild(input);
+      }
+      button.textContent = 'Save';
+      button.onclick = () => saveRow(button);
+    }
+
+    // ===== SAVE EDITED ROW =====
+    function saveRow(button) {
+      const row = button.closest('tr');
+      const inputs = row.querySelectorAll('input');
+      inputs.forEach((input, i) => {
+        row.cells[i].textContent = input.value;
+      });
+      button.textContent = 'Edit';
+      button.onclick = () => editRow(button);
+      alert("Record updated successfully!");
+    }
+  </script>
+</body>
+</html>

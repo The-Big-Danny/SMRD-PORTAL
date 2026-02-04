@@ -1,0 +1,281 @@
+:root {
+  --bg-color: #f4f7f6;
+  --text-color: #333;
+  --sidebar-bg: #2c3e50;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --table-header: #f8f9fa;
+  --border-color: #000000;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --sidebar-bg: #000000;
+  --header-bg: #1e1e1e;
+  --card-bg: #1e1e1e;
+  --table-header: #2d2d2d;
+  --border-color: #ffffff;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.3s ease;
+  font-family: verdana, ;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #17395c;
+  color: #fff;
+  padding: 15px;
+}
+
+.sidebar .logo {
+  font-size: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.sidebar ul li a {
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+  align-items: center;
+  gap: 20px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 7px;
+  transition: 0.6s ease-in-out;
+
+}
+
+
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px 40px;
+  background-color: var(--bg-color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #17395C;
+}
+
+/* Change profile img to be circular if not already */
+#header-profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card:hover {
+  padding: 10px;
+  transition: 0.7s ease-in-out;
+  opacity: 0.7;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.blue {
+  background: blue;
+  color: white;
+}
+
+.green {
+  background: green;
+  color: white;
+}
+
+.lightblue {
+  background: rgb(44, 82, 95);
+  color: white;
+}
+
+.red {
+  background: rgb(198, 43, 43);
+  color: white;
+}
+
+/* charts */
+/* --- GPA Progress Chart Section --- */
+.performance-chart-section {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  margin: 25px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.chart-header h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 250px;
+  /* Controls the height of the chart */
+  width: 90%;
+}
+
+/* Results Table */
+.results {
+  margin-top: 30px;
+}
+
+.results table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results th,
+.results td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.results th {
+  background: #003366;
+  color: white;
+}
+
+.results tr:hover {
+  background: #f1f1f1;
+}
+
+.others a {
+  text-decoration: none;
+}
+
+/* dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: none;
+  z-index: 100;
+}
+
+.dropdown-menu p {
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.dropdown-menu p:last-child {
+  border-bottom: none;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+@media (min-width: 280px) and (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+  }
+
+  .chart-container,
+  .table-section {
+    width: 100%;
+  }
+}

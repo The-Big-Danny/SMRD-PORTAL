@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRD Portal | My Profile</title>
+    <script src="JS-frontend/guard.js"></script>
+    <link rel="stylesheet" href="/PAGES/STUDENT CSS/profile.dash.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo">🎓 SRD Portal</h2>
+            <ul>
+                <li><a href="/PAGES/STUDENT HTML/student-dash.html"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active"><a href="/PAGES/STUDENT HTML/profile-dash.html"><i class="fa fa-user"></i> My
+                        Profile</a></li>
+                <li><a href="/PAGES/STUDENT HTML/view-results.html"><i class="fa fa-chart-bar"></i> My Result</a></li>
+                <li><a href="/PAGES/STUDENT HTML/help-support.html"><i class="fa fa-question-circle"></i> Help</a></li>
+                <li><a href="/PAGES/STUDENT HTML/logout.html"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>My Profile: <span id="user-fullname">Loading...</span></h1>
+            </header>
+
+            <section class="profile-container">
+                <div class="profile-left">
+                    <div class="profile-pic">
+                        <img src="#" alt="Profile Picture" id="profileImage" />
+                        <label for="fileUpload" class="upload-btn" style="cursor: pointer;">Change Photo</label>
+                        <input type="file" id="fileUpload" accept="image/*" hidden />
+                    </div>
+                </div>
+
+                <div class="profile-right">
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="prof-name" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Matric Number</label>
+                            <input type="text" id="prof-matric" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Department</label>
+                            <input type="text" id="prof-dept" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Level</label>
+                            <input type="text" id="prof-level" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Programme / Degree</label>
+                            <input type="text" disabled value="4-years [BACHELOR OF SCIENCE]" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="prof-email" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" id="prof-phone" disabled />
+                        </div>
+
+                        <button class="save-btn" type="button" id="edit-btn"><i class="fa fa-edit"></i> Edit
+                            Details</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="password-section">
+                <h2>Password Security</h2>
+                <form id="password-form">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="current-pass" placeholder="Enter current password" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="new-pass" placeholder="Enter new password" disabled />
+                    </div>
+                    <button class="save-btn" type="button"><i class="fa fa-lock"></i> Update Password</button>
+                </form>
+            </section>
+            <p style="color: #666; font-size: 0.85rem; margin-top: 20px; font-style: italic;">
+                <i class="fa fa-info-circle"></i>
+                Note: Official details are synced with the University Registrar.
+                To request a change to your official records, please contact the ICT department.
+            </p>
+        </main>
+    </div>
+
+    <script src="/JS-frontend/profile.js"></script>
+</body>
+
+</html>

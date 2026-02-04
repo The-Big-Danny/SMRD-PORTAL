@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Student Result | S-R-D Admin</title>
+    <link rel="stylesheet" href="/ADMIN CSS/add-result.css" />
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">S-R-D Admin</h2>
+        <nav class="menu">
+            <a href="/PAGES/ADMIN/admin-dash.html">🏠 Dashboard</a>
+            <a href="add-result.html" class="active">➕ Add Result</a>
+            <a href="/PAGES/ADMIN/view-result.html">📋 View Results</a>
+      <a href="/PAGES/ADMIN/manage-result.html">manage Result</a>
+            <a href="index.html" class="logout">🚪 Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Add Result Form -->
+        <section class="form-section">
+            <h2>Enter Student Details</h2>
+
+            <form class="add-result-form">
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input type="text" id="name" placeholder="Enter full name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="regno">Matric Number</label>
+                    <input type="text" id="regno" placeholder="E.g 2022/249968" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="dept">Department</label>
+                    <select id="dept" required>
+                        <option value="">Select Department</option>
+                        <option>Computer Science</option>
+                        <option>Computer with Statistics</option>
+                        <!-- <option>Computer with Robotics</option>
+            <option>Mathematics</option> -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <input type="text" id="course" placeholder="E.g COS 102" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="level">Level</label>
+                    <select id="level" required>
+                        <option value="">Select Level</option>
+                        <option>100 Level</option>
+                        <option>200 Level</option>
+                        <option>300 Level</option>
+                        <option>400 Level</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Attendance</label>
+                    <input type="number" id="attendance" placeholder="E.g 70%" required />
+                </div>
+                <div class="form-group">
+                    <label for="test">Test Sore</label>
+                    <input type="number" id="test" min="0" max="20" placeholder="E.g 17" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Exam">Exam Score</label>
+                    <input type="number" id="Exam" min="0" max="99" placeholder="E.g 69" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="total"> Total</label>
+                    <input type="number" id="total" min="0" max="99" placeholder="E.g 86" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="gpa">Total GPA</label>
+                    <input type="number" id="gpa" step="0.01" min="0" max="5" placeholder="E.g 3.75" required />
+                </div>
+
+                <button type="submit" class="btn-submit">Save Result</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

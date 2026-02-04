@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRD Portal | Dashboard</title>
+    <script src="JS-frontend/guard.js"></script>
+    <link rel="stylesheet" href="/PAGES/STUDENT CSS/student-dash.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo">S-R-D Portal</h2>
+            <ul>
+                <li class="active"><a href="/PAGES/STUDENT HTML/student-dash.html"><i class="fa fa-home"></i>
+                        Dashboard</a></li>
+                <li><a href="/PAGES/STUDENT HTML/profile-dash.html"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="/PAGES/STUDENT HTML/view-results.html"><i class="fa fa-chart-bar"></i> My Result</a></li>
+                <li><a href="/PAGES/STUDENT HTML/help-support.html"><i class="fa fa-question-circle"></i> Help</a></li>
+                <li><a href="#" id="sidebar-logout"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h2>Dashboard</h2>
+                <div class="user-info">
+                    <div class="profile-header">
+                        <span>Welcome, <b id="user-fullname">Loading...</b></span>
+                        <i class="fa fa-user"></i>
+                    </div>
+
+                    <div class="others">
+                    </div>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card blue">
+                    <h3>TOTAL GPA</h3>
+                    <p id="stat-gpa">0.00</p>
+                </div>
+                <div class="card green">
+                    <h3>Total Courses</h3>
+                    <p id="stat-courses">0</p>
+                </div>
+                <div class="card lightblue">
+                    <h3>Passed</h3>
+                    <p id="stat-passed">0</p>
+                </div>
+                <div class="card red">
+                    <h3>Failed</h3>
+                    <p id="stat-failed">0</p>
+                </div>
+            </section>
+
+            <section class="performance-chart-section">
+                <div class="chart-header">
+                    <h2>GPA Performance Progress</h2>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </section>
+
+            <section class="results">
+                <h2>Newly Uploaded Results</h2>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Score</th>
+                            <th>Grade</th>
+                            <th>Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <tr>
+                            <td colspan="5" style="text-align:center;">Fetching your results...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/JS-frontend/student-dash.js"></script>
+    <script src="/JS-frontend/notification.js"></script>
+</body>
+
+</html>

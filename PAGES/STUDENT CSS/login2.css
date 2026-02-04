@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', 'Verdana', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1b1b1b, #2b2d42, #0f2027);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/asset/images/photo_2025-12-21_02-43-46.jpg') no-repeat center center/cover;
+  filter: blur(5px) brightness(0.7);
+  z-index: -1;
+}
+
+.login-container {
+  width: 600px;
+  padding: 2.5em;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  /* backdrop-filter: blur(12px); */
+  color: black;
+  animation: fadeIn 0.8s ease;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.6em;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.8em;
+  margin-bottom: 1.5em;
+  opacity: 0.8;
+}
+
+.input-group {
+  margin-bottom: 1.2em;
+  display: flex;
+}
+
+label {
+  display: block;
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
+  opacity: 0.8;
+}
+
+input { 
+  width: 100%;
+  padding: 0.7em;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.95em;
+  transition: background 0.3s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.options a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+
+.login-btn {
+  width: 100%;
+  padding: 0.8em;
+  border: none;
+  border-radius: 10px;
+  
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #0077b6, #023e8a);
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0, 183, 255, 0.4);
+}
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Space for the icon */
+}
+
+.password-container i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.password-container i:hover {
+    color: #17395c; /* Matches your theme color */
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8em;
+  margin-top: 1.5em;
+  opacity: 0.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // 1. Check if token exists
+        if (!localStorage.getItem("token")) {
+            window.location.replace("login2.html");
+        }
+
+        // 2. Kill the "Back Button" ghost
+        window.onpageshow = function (event) {
+            if (event.persisted || !localStorage.getItem("token")) {
+                window.location.replace("login2.html");
+            }
+        };
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support</title>
+    <link rel="stylesheet" href="/PAGES/STUDENT CSS/help-support.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>🎓 SRD Portal</h2>
+            <ul>
+                <li><a href="student-dash.html"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="profile-dash.html"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="view-results.html"><i class="fa fa-chart-bar"></i> My Result</a></li>
+                <li class="active"><a href="#"><i class="fa fa-question-circle"></i> Help</a></li>
+                <li><a href="logout.html"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-content">
+            <header>
+                <h1>Help & Support</h1>
+                <p>Find answers or contact support below.</p>
+            </header>
+
+            <div class="help-grid">
+                <div class="support-card">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="accordion-item">
+                        <button class="accordion-header">How do I view my results?</button>
+                        <div class="accordion-body">
+                            <p>Click on "My Result" in the sidebar and select the semester you want to check.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">My GPA seems wrong, what do I do?</button>
+                        <div class="accordion-body">
+                            <p>Please contact your department's exams officer to verify your course units and scores.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-card">
+                    <h3>Contact Admin</h3>
+                    <form id="helpForm">
+                        <div class="input-group">
+                            <label>Subject</label>
+                            <select id="subject">
+                                <option>General Inquiry</option>
+                                <option>Result Issue</option>
+                                <option>Login Problem</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Message</label>
+                            <textarea id="message" placeholder="Type here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/JS-frontend/help-support.js"></script>
+</body>
+
+</html>

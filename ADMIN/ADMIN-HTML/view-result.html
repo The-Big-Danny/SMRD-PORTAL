@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Results | S-R-D Admin</title>
+    <link rel="stylesheet" href="/ADMIN CSS/view-result.css" />
+</head>
+
+<body>
+    <header>
+        <!-- Sidebar -->
+        <h2 class="logo">S-R-D ADMIN</h2>
+        <nav class="menu">
+            <a href="/PAGES/ADMIN/admin-dash.html">🏠 Dashboard</a>
+            <a href="/PAGES/ADMIN/add-result.html">➕ Add Result</a>
+            <a href="/PAGES/ADMIN/view-result.html" class="active">📋 View Results</a>
+            <a href="/PAGES/ADMIN/manage-result.html">Manage Result</a>
+            <a href="index.html" class="logout">🚪 Logout</a>
+        </nav>
+
+    </header>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="topbar">
+            <input type="text" id="searchInput" placeholder="Search by name or reg no..." class="search-bar" />
+            <div class="profile">
+                <img src="https://i.pravatar.cc/40" alt="" />
+                <span>Admin</span>
+            </div>
+        </div>
+
+        <section class="results-section">
+            <h2>All Student Results</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Name ⬍</th>
+                        <th onclick="sortTable(1)">Reg No ⬍</th>
+                        <th onclick="sortTable(2)">Department ⬍</th>
+                        <th onclick="sortTable(3)">Level ⬍</th>
+                        <th onclick="sortTable(4)">GPA ⬍</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td>2022/247081</td>
+                        <td>Computer Science</td>
+                        <td>200 Level</td>
+                        <td>4.00</td>
+                    </tr>
+                    <tr>
+                        <td>Emmanuel Ugwuneji</td>
+                        <td>2022/247089</td>
+                        <td>Statistics</td>
+                        <td>300 Level</td>
+                        <td>3.85</td>
+                    </tr>
+                    <tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr><tr>
+                        <td>Daniel Obasi</td>
+                        <td>2022/247077</td>
+                        <td>Information Tech</td>
+                        <td>400 Level</td>
+                        <td>3.67</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        // ===== SEARCH FUNCTION =====
+        const searchInput = document.getElementById("searchInput");
+        const resultsTable = document.getElementById("resultsTable").getElementsByTagName("tbody")[0];
+
+        searchInput.addEventListener("keyup", function () {
+            const filter = searchInput.value.toLowerCase();
+            const rows = resultsTable.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].textContent.toLowerCase().includes(filter)) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? "" : "none";
+            }
+        });
+
+        // ===== SORT TABLE FUNCTION =====
+        function sortTable(columnIndex) {
+            const table = document.getElementById("resultsTable");
+            let switching = true;
+            let dir = "asc";
+            let switchcount = 0;
+            while (switching) {
+                switching = false;
+                const rows = table.rows;
+                for (let i = 1; i < rows.length - 1; i++) {
+                    let shouldSwitch = false;
+                    let x = rows[i].getElementsByTagName("td")[columnIndex];
+                    let y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+                    if (dir === "asc" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (dir === "desc" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
