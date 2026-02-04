@@ -1,5 +1,5 @@
 const Result = require("../models/result");
-const User = require("../models/User"); 
+const User = require("../models/user"); 
 const sendEmail = require("../utils/sendEmail"); 
 
 // @desc    Add a new result (Admin Upload)
@@ -82,4 +82,5 @@ exports.getMyResults = async (req, res) => {
     console.error("GET RESULTS ERROR 👉", error.message);
     res.status(500).json({ message: "Error fetching results", error: error.message });
   }
+
 };
