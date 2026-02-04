@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -95,4 +95,5 @@ exports.getProfile = async (req, res) => {
     console.error("GET PROFILE ERROR 👉", error.message);
     res.status(500).json({ message: "Server error fetching profile", error: error.message });
   }
+
 };
