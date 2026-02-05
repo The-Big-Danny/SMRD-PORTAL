@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // SETTINGS: Change to your Render URL after deployment
-    const API_BASE_URL = "http://localhost:5000"; 
+    const API_BASE_URL = "https://smrd-portal.onrender.com"; 
     
     const registerForm = document.getElementById("registerForm");
 
@@ -70,4 +70,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
 });
