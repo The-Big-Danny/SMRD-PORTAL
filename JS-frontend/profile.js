@@ -1,6 +1,5 @@
-// --- 1. SETTINGS ---
-// Change this to your Render URL after deployment
-const BASE_URL = "http://localhost:5000"; 
+
+const BASE_URL = "https://smrd-portal.onrender.com"; 
 
 // Toast Error Function
 function showServerError(message = "Server is currently offline. Please try again later.") {
@@ -97,4 +96,5 @@ function setupPhotoUpload() {
             }
         });
     }
+
 }
