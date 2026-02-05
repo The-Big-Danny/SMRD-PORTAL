@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 // Verify password before wiping session
-                const response = await fetch("http://localhost:5000/api/auth/login", {
+                const response = await fetch("https://smrd-portal.onrender.com/api/auth/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -52,4 +52,5 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("CRITICAL: Logout button with ID 'confirm-btn' was not found!");
     }
+
 });
