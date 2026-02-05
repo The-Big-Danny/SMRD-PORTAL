@@ -1,4 +1,4 @@
-const Student = require("../models/Student");
+const Student = require("../models/student");
 const Result = require("../models/result");
 const bcrypt = require("bcryptjs"); // Don't forget to import this!
 
@@ -82,4 +82,5 @@ exports.getStudentDashboard = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error loading dashboard", error: error.message });
   }
+
 };
