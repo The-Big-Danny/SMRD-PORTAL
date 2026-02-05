@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Replace with your Render URL when you deploy
-            const API_URL = "http://localhost:5000/api/auth/login"; 
+            const API_URL = "https://smrd-portal.onrender.com/api/auth/login"; 
 
             try {
                 const response = await fetch(API_URL, {
@@ -63,4 +63,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
 });
