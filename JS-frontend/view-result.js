@@ -1,6 +1,6 @@
 // --- 1. SETTINGS ---
 // Change this to your Render URL after deployment
-const BASE_URL = "http://localhost:5000"; 
+const BASE_URL = "https://smrd-portal.onrender.com"; 
 
 document.addEventListener("DOMContentLoaded", async () => {
     // SELECT ELEMENTS
@@ -141,4 +141,5 @@ document.addEventListener("DOMContentLoaded", async () => {
             printWindow.print();
         });
     }
+
 });
