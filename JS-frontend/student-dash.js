@@ -94,7 +94,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <td>${res.courseTitle}</td>
                             <td>${res.score}</td>
                             <td>${res.grade}</td>
-                            <td>${res.gpa}</td>
                             <td>${res.remark}</td>
                         </tr>`;
                 });
@@ -170,4 +169,5 @@ function setupUILogic() {
     }
 
 }
+
 
