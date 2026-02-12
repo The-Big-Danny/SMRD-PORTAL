@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
     department: String,
     level: String,
     year: String,
-    // UPDATED: Email is now required and unique for the notification system
+
     email: { 
       type: String, 
       required: true, 
@@ -25,6 +25,5 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);
