@@ -7,13 +7,13 @@ exports.registerUser = async (req, res) => {
   try {
     const { name, matricNumber, department, level, year, email, phone, password } = req.body;
 
-    // 1. Check if Matric Number already exists
+    // 1. Check if Matric Number already exists in the 'users' collection
     let userByMatric = await User.findOne({ matricNumber });
     if (userByMatric) {
       return res.status(400).json({ message: "Student with this Matric Number already exists" });
     }
 
-    // 2. Check if Email already exists (Crucial for the notification system)
+    // 2. Check if Email already exists
     let userByEmail = await User.findOne({ email: email.toLowerCase() });
     if (userByEmail) {
       return res.status(400).json({ message: "A user with this email already exists" });
@@ -22,15 +22,17 @@ exports.registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    user = new User({
+    // Using standardized field names: 'name' and 'year'
+    const user = new User({
       name,
       matricNumber,
       department,
       level,
       year,
-      email: email.toLowerCase(), // Store in lowercase for consistency
+      email: email.toLowerCase(),
       phone,
-      password: hashedPassword
+      password: hashedPassword,
+      role: "student"
     });
 
     await user.save();
@@ -57,6 +59,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
+    // Sign with { id: user._id } to match our middleware extraction
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
@@ -71,7 +74,7 @@ exports.loginUser = async (req, res) => {
         name: user.name,
         matricNumber: user.matricNumber,
         department: user.department,
-        email: user.email // Added email to the response
+        email: user.email 
       }
     });
 
@@ -84,7 +87,8 @@ exports.loginUser = async (req, res) => {
 // --- GET STUDENT PROFILE ---
 exports.getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    // FIX: req.user is now the ID string directly from authMiddleware
+    const user = await User.findById(req.user).select("-password");
     
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -95,5 +99,4 @@ exports.getProfile = async (req, res) => {
     console.error("GET PROFILE ERROR 👉", error.message);
     res.status(500).json({ message: "Server error fetching profile", error: error.message });
   }
-
 };
