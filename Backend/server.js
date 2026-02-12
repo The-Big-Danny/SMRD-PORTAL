@@ -12,11 +12,11 @@ const app = express();
 connectDB();
 
 // 2. Middleware
-app.use(cors()); // In production, you can restrict this to your frontend URL
+app.use(cors()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 3. Prevent Back-Button Cache (Crucial for Auth Defense)
+// 3. Prevent Back-Button Cache
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     res.set('Pragma', 'no-cache');
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// 4. Test User Logic (Keep this for the defense so you always have a login)
+// 4. Test User Logic (Standardized to use 'User' model)
 const createTestUser = async () => {
   try {
     const existingUser = await User.findOne({ matricNumber: "SMRD001" });
@@ -33,8 +33,12 @@ const createTestUser = async () => {
     await User.create({
       name: "Test Student",
       matricNumber: "SMRD001",
+      email: "test@smrd.com",
       password: hashedPassword,
       role: "student",
+      department: "Computer Science",
+      level: "400",
+      year: "4 YEARS"
     });
     console.log("✅ Default Test User: SMRD001 / password123");
   } catch (error) {
@@ -43,9 +47,8 @@ const createTestUser = async () => {
 };
 createTestUser();
 
-// 5. Routes
+// 5. Routes (Removed the redundant /api/students entry)
 app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/students", require("./routes/studentRoutes"));
 app.use("/api/results", require("./routes/resultRoutes"));
 
 // 6. Root Endpoint
@@ -53,9 +56,8 @@ app.get("/", (req, res) => {
   res.send("SMRD Portal API is Online");
 });
 
-// 7. Port Configuration for Render
+// 7. Port Configuration
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
-
+  console.log(`Server running on port ${PORT}`);
 });
