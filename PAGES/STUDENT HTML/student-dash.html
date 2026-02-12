@@ -8,8 +8,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SRD Portal | Dashboard</title>
-    <script src="JS-frontend/guard.js"></script>
-    <link rel="stylesheet" href="/PAGES/STUDENT CSS/student-dash.css" />
+    <script src="../../JS-frontend/guard.js"></script>
+    <link rel="stylesheet" href="../STUDENT CSS/student-dash.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +21,10 @@
         <aside class="sidebar">
             <h2 class="logo">S-R-D Portal</h2>
             <ul>
-                <li class="active"><a href="/PAGES/STUDENT HTML/student-dash.html"><i class="fa fa-home"></i>
-                        Dashboard</a></li>
-                <li><a href="/PAGES/STUDENT HTML/profile-dash.html"><i class="fa fa-user"></i> My Profile</a></li>
-                <li><a href="/PAGES/STUDENT HTML/view-results.html"><i class="fa fa-chart-bar"></i> My Result</a></li>
-                <li><a href="/PAGES/STUDENT HTML/help-support.html"><i class="fa fa-question-circle"></i> Help</a></li>
+                <li class="active"><a href="./student-dash.html"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="./profile-dash.html"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="./view-results.html"><i class="fa fa-chart-bar"></i> My Result</a></li>
+                <li><a href="./help-support.html"><i class="fa fa-question-circle"></i> Help</a></li>
                 <li><a href="#" id="sidebar-logout"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </aside>
@@ -38,11 +37,8 @@
                         <span>Welcome, <b id="user-fullname">Loading...</b></span>
                         <i class="fa fa-user"></i>
                     </div>
-
-                    <div class="others">
-                    </div>
                 </div>
-            </header>
+                </header>
 
             <section class="cards">
                 <div class="card blue">
@@ -95,8 +91,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/JS-frontend/student-dash.js"></script>
-    <script src="/JS-frontend/notification.js"></script>
+    <script src="../../JS-frontend/student-dash.js"></script>
 </body>
 
 </html>
