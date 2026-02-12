@@ -2,22 +2,20 @@ const Result = require("../models/result");
 const User = require("../models/user"); 
 const sendEmail = require("../utils/sendEmail"); 
 
-// @desc    Add a new result (Admin Upload)
+// @desc    Add new result (Admin only)
 // @route   POST /api/results
 exports.addResult = async (req, res) => {
   try {
-    // Destructure matricNumber from body
     const { matricNumber, courseName, courseCode, score, semester, session, unit, year } = req.body;
 
-    // 1. IMPORTANT: Find the ACTUAL student by Matric Number
+    // Search specifically in the 'users' collection
     const student = await User.findOne({ matricNumber });
     
     if (!student) {
-      console.log(`❌ Upload Failed: Student with Matric ${matricNumber} not found.`);
       return res.status(404).json({ message: "Student not found with this Matric Number" });
     }
 
-    // 2. Automatic Grade, Point, and Remark Logic
+    // Logic for grade calculation
     let grade, point, remark;
     if (score >= 70) { grade = "A"; point = 5; remark = "Excellent"; }
     else if (score >= 60) { grade = "B"; point = 4; remark = "Very Good"; }
@@ -25,9 +23,8 @@ exports.addResult = async (req, res) => {
     else if (score >= 45) { grade = "D"; point = 2; remark = "Pass"; }
     else { grade = "F"; point = 0; remark = "Fail"; }
 
-    // 3. Create the result linked to the found Student's _id
     const newResult = new Result({
-      student: student._id, // Use the student found above, NOT req.user.id
+      student: student._id, // References the User ObjectId
       courseName,
       courseCode,
       unit: unit || 3,
@@ -41,46 +38,40 @@ exports.addResult = async (req, res) => {
     });
 
     const savedResult = await newResult.save();
-    console.log(`📍 Result saved for ${student.name}. Triggering email...`);
 
-    // --- EMAIL NOTIFICATION LOGIC ---
+    // Notify student via email
     try {
-      if (!student.email) {
-        console.log("⚠️ Student found, but has no email field for notification.");
-      } else {
-        console.log(`📧 Attempting to send email to: ${student.email}`);
-        
+      if (student.email) {
         await sendEmail({
           email: student.email,
           subject: `New Result Published: ${courseCode}`,
-          message: `Hello ${student.name},\n\nYour result for ${courseName} (${courseCode}) has been uploaded.\n\nGrade: ${grade}\nRemark: ${remark}\n\nLog in to your dashboard to view full details.`
+          message: `Hello ${student.name}, your result for ${courseName} (${courseCode}) has been uploaded. \nGrade: ${grade} \nScore: ${score}`
         });
-        
-        console.log(`✅ SUCCESS: Email sent to ${student.email}`);
       }
-    } catch (emailError) {
-      console.error("❌ NODEMAILER ERROR:", emailError.message);
+    } catch (e) { 
+      console.error("Email notification failed, but result was saved."); 
     }
 
     res.status(201).json({ success: true, data: savedResult });
   } catch (error) {
-    console.error("ADD RESULT ERROR 👉", error.message);
     res.status(500).json({ message: "Error saving result", error: error.message });
   }
 };
 
-// @desc    Get logged in student's results
+// @desc    Get logged-in student results
+// @route   GET /api/results/my-results
 exports.getMyResults = async (req, res) => {
   try {
-    const results = await Result.find({ student: req.user.id }).sort({ createdAt: -1 });
-    res.status(200).json({
-      success: true,
-      count: results.length,
-      data: results
+    // req.user is the string ID from authMiddleware
+    // We query the 'student' field which matches your Atlas change
+    const results = await Result.find({ student: req.user }).sort({ createdAt: -1 });
+    
+    res.status(200).json({ 
+      success: true, 
+      count: results.length, 
+      data: results 
     });
   } catch (error) {
-    console.error("GET RESULTS ERROR 👉", error.message);
     res.status(500).json({ message: "Error fetching results", error: error.message });
   }
-
 };
