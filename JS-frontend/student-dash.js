@@ -1,8 +1,5 @@
-// --- 1. SETTINGS & CONSTANTS ---
-// Change this to your Render URL after deployment
 const BASE_URL = "https://smrd-portal.onrender.com"; 
 
-// --- 2. Toast Error Function ---
 function showServerError(message = "Server is currently offline. Please try again later.") {
     if (document.querySelector('.toast-container')) return;
     const toast = document.createElement('div');
@@ -15,7 +12,7 @@ function showServerError(message = "Server is currently offline. Please try agai
     }, 5000);
 }
 
-// --- 3. GPA Calculation Helper ---
+// --- 3. GPA Calculation Helper (Fixed to handle potential String vs Number issues) ---
 function calculateSemesterGPAs(results) {
     const semesters = {
         "1-First": [], "1-Second": [], "2-First": [], "2-Second": [],
@@ -28,16 +25,17 @@ function calculateSemesterGPAs(results) {
     return Object.keys(semesters).map(key => {
         const semResults = semesters[key];
         if (semResults.length === 0) return 0;
-        const totalUnits = semResults.reduce((sum, r) => sum + r.unit, 0);
-        const totalPoints = semResults.reduce((sum, r) => sum + (r.point * r.unit), 0);
-        return (totalPoints / totalUnits).toFixed(2);
+        
+        // Safety: Ensure unit and point are treated as numbers
+        const totalUnits = semResults.reduce((sum, r) => sum + (Number(r.unit) || 0), 0);
+        const totalPoints = semResults.reduce((sum, r) => sum + ((Number(r.point) || 0) * (Number(r.unit) || 0)), 0);
+        
+        return totalUnits > 0 ? (totalPoints / totalUnits).toFixed(2) : 0;
     });
 }
 
-// --- 4. Main Dashboard Logic ---
 document.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token");
-
     if (!token) {
         window.location.replace("login2.html");
         return;
@@ -47,30 +45,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const resultsBody = document.getElementById("results-body");
 
     try {
-        // A. FETCH PROFILE & RESULTS SIMULTANEOUSLY (Using BASE_URL)
         const [profileRes, resultsRes] = await Promise.all([
-            fetch(`${BASE_URL}/api/auth/profile`, {
-                headers: { "x-auth-token": token }
-            }),
-            fetch(`${BASE_URL}/api/results/my-results`, {
-                headers: { "x-auth-token": token }
-            })
+            fetch(`${BASE_URL}/api/auth/profile`, { headers: { "x-auth-token": token } }),
+            fetch(`${BASE_URL}/api/results/my-results`, { headers: { "x-auth-token": token } })
         ]);
 
-        // Handle Session Expiration/Unauthorized
         if (profileRes.status === 401 || resultsRes.status === 401) {
             localStorage.clear();
             window.location.replace("login2.html");
             return;
         }
 
-        // B. UPDATE PROFILE NAME
         if (profileRes.ok) {
             const student = await profileRes.json();
             if (nameDisplay) nameDisplay.innerText = student.name;
         }
 
-        // C. PROCESS RESULTS
         const resultsData = await resultsRes.json();
         if (resultsRes.ok && resultsData.success) {
             const results = resultsData.data;
@@ -84,47 +74,47 @@ document.addEventListener("DOMContentLoaded", async () => {
                 let totalPoints = 0, totalUnits = 0, passedCount = 0, failedCount = 0;
 
                 results.forEach(res => {
-                    totalUnits += res.unit;
-                    totalPoints += (res.point * res.unit);
+                    // SAFETY MAPPING: Check both common field names
+                    const unit = Number(res.unit) || 0;
+                    const point = Number(res.point) || 0;
+                    const title = res.courseTitle || res.courseName || "Untitled Course";
+                    const remark = res.remark || (res.grade === "F" ? "Fail" : "Passed");
+
+                    totalUnits += unit;
+                    totalPoints += (point * unit);
                     if (res.grade === "F") failedCount++; else passedCount++;
 
                     resultsBody.innerHTML += `
                         <tr>
                             <td>${res.courseCode}</td>
-                            <td>${res.courseTitle}</td>
+                            <td>${title}</td>
                             <td>${res.score}</td>
                             <td>${res.grade}</td>
-                            <td>${res.remark}</td>
+                            <td>${remark}</td>
                         </tr>`;
                 });
 
-                // Update Stats Cards
                 const gpa = totalUnits > 0 ? (totalPoints / totalUnits).toFixed(2) : "0.00";
                 document.getElementById("stat-gpa").innerText = gpa;
                 document.getElementById("stat-courses").innerText = results.length;
                 document.getElementById("stat-passed").innerText = passedCount;
                 document.getElementById("stat-failed").innerText = failedCount;
 
-                // Update Chart
                 const semesterData = calculateSemesterGPAs(results);
                 updateChart(semesterData);
             }
         }
-
     } catch (error) {
         console.error("Dashboard error:", error);
-        showServerError("Connection Failed. Checking backend status...");
+        showServerError("Connection Failed.");
     }
-
     setupUILogic();
 });
 
-// Helper for Chart Refreshing
 function updateChart(semesterData) {
     const chartElement = document.getElementById('performanceChart');
     if (!chartElement) return;
     const ctx = chartElement.getContext('2d');
-    
     if (window.myGPAChart) window.myGPAChart.destroy();
     
     window.myGPAChart = new Chart(ctx, {
@@ -134,7 +124,7 @@ function updateChart(semesterData) {
             datasets: [{
                 label: 'GPA Progress',
                 data: semesterData,
-                backgroundColor: 'rgba(23, 57, 92, 0.2)', // Matches your sidebar #17395c
+                backgroundColor: 'rgba(23, 57, 92, 0.2)',
                 borderColor: '#17395c',
                 borderWidth: 2,
                 fill: true,
@@ -146,28 +136,18 @@ function updateChart(semesterData) {
         options: { 
             responsive: true, 
             maintainAspectRatio: false, 
-            scales: { 
-                y: { 
-                    beginAtZero: true, 
-                    max: 5.0,
-                    ticks: { stepSize: 1.0 }
-                } 
-            } 
+            scales: { y: { beginAtZero: true, max: 5.0 } } 
         }
     });
 }
 
-// UI Setup (Logout/Dropdowns)
 function setupUILogic() {
     const logoutLink = document.getElementById("sidebar-logout");
     if (logoutLink) {
         logoutLink.addEventListener("click", (e) => {
             e.preventDefault();
             localStorage.clear();
-            window.location.replace("logout.html");
+            window.location.replace("login2.html");
         });
     }
-
 }
-
-
