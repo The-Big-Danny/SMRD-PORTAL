@@ -1,6 +1,4 @@
-// --- 1. SETTINGS ---
-// Change this to your Render URL after deployment
-const BASE_URL = "https://smrd-portal.onrender.com"; 
+const BASE_URL = "https://smrd-portal.onrender.com";
 
 document.addEventListener("DOMContentLoaded", async () => {
     // SELECT ELEMENTS
@@ -36,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- 3. DYNAMIC RENDER FUNCTION ---
     function renderResults(semesterKey) {
         const [year, semester] = semesterKey.split("-");
-        const filtered = allResults.filter(r => r.year == year && r.semester == semester);
+        const filtered = allResults.filter(r => String(r.year) === year && r.semester === semester);
 
         resultsTableBody.innerHTML = "";
         let totalCredits = 0;
@@ -47,17 +45,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             resultsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No records found for this semester.</td></tr>`;
         } else {
             filtered.forEach((course) => {
-                totalCredits += course.unit;
-                totalPoints += (course.unit * (gradeWeight[course.grade] || 0));
+                // Safety: Ensure units and grades are handled correctly
+                const unit = Number(course.unit) || 0;
+                const title = course.courseTitle || course.courseName || "Untitled Course";
+                const remark = course.remark || (course.grade === "F" ? "Fail" : "Passed");
+                const points = unit * (gradeWeight[course.grade] || 0);
+
+                totalCredits += unit;
+                totalPoints += points;
 
                 resultsTableBody.innerHTML += `
                     <tr>
                         <td>${course.courseCode}</td>
-                        <td>${course.courseName}</td>
-                        <td>${course.unit}</td>
+                        <td>${title}</td>
+                        <td>${unit}</td>
                         <td>${course.score}</td>
                         <td>${course.grade}</td>
-                        <td>${course.remark}</td>
+                        <td>${remark}</td>
                     </tr>`;
             });
         }
@@ -72,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderResults(e.target.value);
     });
 
-    // --- 5. PDF DOWNLOAD FEATURE ---
+    // --- 5. PDF DOWNLOAD FEATURE (Updated for naming consistency) ---
     const downloadBtn = document.querySelector('#download-pdf');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
@@ -106,10 +110,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const cells = row.querySelectorAll('td');
                 if (cells.length > 1) {
                     doc.text(cells[0].textContent, 20, y);
-                    doc.text(cells[1].textContent.substring(0, 25), 45, y);
-                    doc.text(cells[2].textContent, 125, y);
-                    doc.text(cells[3].textContent, 145, y);
-                    doc.text(cells[4].textContent, 165, y);
+                    doc.text(cells[1].textContent.substring(0, 25), 45, y); // Title column
+                    doc.text(cells[2].textContent, 125, y); // Unit column
+                    doc.text(cells[3].textContent, 145, y); // Score column
+                    doc.text(cells[4].textContent, 165, y); // Grade column
                     y += 8;
                 }
             });
@@ -131,8 +135,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <head><title>Result Slip</title><style>body{font-family:sans-serif;padding:20px;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #000;padding:8px;}</style></head>
                 <body>
                     <h2>UNIVERSITY OF NIGERIA, NSUKKA</h2>
-                    <p>Name: ${localStorage.getItem('studentName')}</p>
-                    <p>Matric: ${localStorage.getItem('matricNo')}</p>
+                    <p>Name: ${localStorage.getItem('studentName') || 'N/A'}</p>
+                    <p>Matric: ${localStorage.getItem('matricNo') || 'N/A'}</p>
                     <hr>${tableHTML}<br>${summaryHTML}
                 </body>
                 </html>
@@ -141,5 +145,4 @@ document.addEventListener("DOMContentLoaded", async () => {
             printWindow.print();
         });
     }
-
 });
